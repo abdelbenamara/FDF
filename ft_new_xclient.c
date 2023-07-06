@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init_xclient.c                                  :+:      :+:    :+:   */
+/*   ft_new_xclient.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abenamar <abenamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 04:20:24 by abenamar          #+#    #+#             */
-/*   Updated: 2023/07/05 04:20:45 by abenamar         ###   ########.fr       */
+/*   Updated: 2023/07/05 23:16:42 by abenamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_xclient	*ft_init_xclient(void)
+t_xclient	*ft_new_xclient(void)
 {
 	t_xclient	*xclient;
 
@@ -21,14 +21,17 @@ t_xclient	*ft_init_xclient(void)
 		return (NULL);
 	xclient->mlx = NULL;
 	xclient->win = NULL;
-	xclient->img = NULL;
-	xclient->buf = NULL;
-	xclient->data_addr = NULL;
+	xclient->ximage = NULL;
 	xclient->mlx = mlx_init();
 	if (!(xclient->mlx))
 		return (ft_free_xclient(xclient), NULL);
 	xclient->win = mlx_new_window(xclient->mlx, XSIZE, YSIZE, TITLE);
 	if (!(xclient->win))
 		return (ft_free_xclient(xclient), NULL);
+	xclient->ximage = ft_new_ximage(xclient);
+	if (!(xclient->ximage))
+		return (ft_free_xclient(xclient), NULL);
+	xclient->ox = 0;
+	xclient->oy = 0;
 	return (xclient);
 }
