@@ -6,7 +6,7 @@
 #    By: abenamar <abenamar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/02 22:58:00 by abenamar          #+#    #+#              #
-#    Updated: 2023/07/05 04:22:16 by abenamar         ###   ########.fr        #
+#    Updated: 2023/07/06 22:59:39 by abenamar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,12 @@ LDLIBS += -lXext
 LDLIBS += -lX11
 LDLIBS += -lm
 
-SRCS := ft_free_xclient.c
-SRCS += ft_init_xclient.c
+SRCS := ft_free_ximage.c
+SRCS += ft_new_ximage.c
+SRCS += ft_free_xclient.c
+SRCS += ft_new_xclient.c
+SRCS += ft_render_frame.c
+SRCS += ft_handle_key_press.c
 SRCS += fdf.c
 
 OBJS := $(SRCS:.c=.o)
