@@ -6,7 +6,7 @@
 /*   By: abenamar <abenamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 23:00:16 by abenamar          #+#    #+#             */
-/*   Updated: 2023/07/05 04:23:22 by abenamar         ###   ########.fr       */
+/*   Updated: 2023/07/06 23:02:24 by abenamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,33 @@
 # define YSIZE	720
 # define TITLE	"FDF"
 
-typedef struct s_xclient
+typedef struct s_ximage
 {
 	void	*mlx;
-	void	*win;
 	void	*img;
-	void	*buf;
-	char	*data_addr;
-	int		bits_per_pixel;
-	int		line_size;
+	char	*data;
+	int		bpp;
+	int		lsize;
 	int		endian;
+}	t_ximage;
+
+typedef struct s_xclient
+{
+	void		*mlx;
+	void		*win;
+	t_ximage	*ximage;
+	int			ox;
+	int			oy;
 }	t_xclient;
 
+void		ft_free_ximage(t_ximage *ximage);
+t_ximage	*ft_new_ximage(t_xclient *xclient);
 
 void		ft_free_xclient(t_xclient *xclient);
-t_xclient	*ft_init_xclient(void);
+t_xclient	*ft_new_xclient(void);
+
+int			ft_render_frame(t_xclient *xclient);
+
+int			ft_handle_key_press(int keycode, t_xclient *xclient);
 
 #endif
