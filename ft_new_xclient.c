@@ -6,13 +6,13 @@
 /*   By: abenamar <abenamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 04:20:24 by abenamar          #+#    #+#             */
-/*   Updated: 2023/07/05 23:16:42 by abenamar         ###   ########.fr       */
+/*   Updated: 2023/07/07 02:11:29 by abenamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_xclient	*ft_new_xclient(void)
+t_xclient	*ft_new_xclient(char ***map)
 {
 	t_xclient	*xclient;
 
@@ -31,6 +31,7 @@ t_xclient	*ft_new_xclient(void)
 	xclient->ximage = ft_new_ximage(xclient);
 	if (!(xclient->ximage))
 		return (ft_free_xclient(xclient), NULL);
+	xclient->map = map;
 	xclient->ox = 0;
 	xclient->oy = 0;
 	return (xclient);
