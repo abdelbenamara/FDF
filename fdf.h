@@ -6,7 +6,7 @@
 /*   By: abenamar <abenamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 23:00:16 by abenamar          #+#    #+#             */
-/*   Updated: 2023/07/07 02:11:38 by abenamar         ###   ########.fr       */
+/*   Updated: 2023/07/14 02:36:23 by abenamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_xclient
 	void		*win;
 	t_ximage	*ximage;
 	char		***map;
+	size_t		ppad;
 	int			ox;
 	int			oy;
 }	t_xclient;
