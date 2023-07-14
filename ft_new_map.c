@@ -6,7 +6,7 @@
 /*   By: abenamar <abenamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 00:17:21 by abenamar          #+#    #+#             */
-/*   Updated: 2023/07/07 02:17:21 by abenamar         ###   ########.fr       */
+/*   Updated: 2023/07/12 19:05:03 by abenamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	***ft_lst_to_map(t_list *lst)
 	char	***map;
 	size_t	i;
 
-	map = malloc((ft_lstsize(lst) + 1) * sizeof(int **));
+	map = malloc((ft_lstsize(lst) + 1) * sizeof(char **));
 	if (!map)
 		return (NULL);
 	i = 0;
@@ -29,8 +29,7 @@ static char	***ft_lst_to_map(t_list *lst)
 		lst = lst->next;
 		++i;
 	}
-	map[i] = NULL;
-	return (map);
+	return (map[i] = NULL, map);
 }
 
 char	***ft_new_map(char *file)
@@ -58,6 +57,5 @@ char	***ft_new_map(char *file)
 	map = ft_lst_to_map(lst);
 	if (!map)
 		return (ft_lstclear(&lst, free), NULL);
-	ft_lstclear(&lst, free);
-	return (map);
+	return (ft_lstclear(&lst, free), map);
 }
