@@ -6,7 +6,7 @@
 #    By: abenamar <abenamar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/02 22:58:00 by abenamar          #+#    #+#              #
-#    Updated: 2023/07/07 02:09:29 by abenamar         ###   ########.fr        #
+#    Updated: 2023/07/18 20:14:12 by abenamar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,7 @@ LDLIBS += -lm
 
 SRCS := ft_free_map.c
 SRCS += ft_new_map.c
-SRCS += ft_free_ximage.c
-SRCS += ft_new_ximage.c
+SRCS += ft_init_ximage.c
 SRCS += ft_free_xclient.c
 SRCS += ft_new_xclient.c
 SRCS += ft_render_frame.c
