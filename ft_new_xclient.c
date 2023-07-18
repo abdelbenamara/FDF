@@ -6,7 +6,7 @@
 /*   By: abenamar <abenamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 04:20:24 by abenamar          #+#    #+#             */
-/*   Updated: 2023/07/14 02:39:29 by abenamar         ###   ########.fr       */
+/*   Updated: 2023/07/18 20:15:24 by abenamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,37 +22,43 @@ static size_t	ft_tab_size(void **tab)
 	return (i);
 }
 
-static size_t	ft_min(size_t a, size_t b)
+static t_xparams	ft_init_xparams(char ***map)
 {
-	if (a < b)
-		return (a);
-	return (b);
+	t_xparams	xparams;
+
+	xparams.map = map;
+	xparams.width = ft_tab_size((void **) map[0]);
+	xparams.height = ft_tab_size((void **) map);
+	xparams.wpad = WIDTH / (xparams.width * 2);
+	xparams.hpad = HEIGHT / (xparams.height * 2);
+	xparams.padding = xparams.wpad;
+	if (xparams.wpad > xparams.hpad)
+		xparams.padding = xparams.hpad;
+	xparams.zoom = xparams.padding;
+	xparams.origin.x = WIDTH / 2;
+	xparams.origin.y = HEIGHT / 2;
+	return (xparams);
 }
 
 t_xclient	*ft_new_xclient(char ***map)
 {
-	const size_t	xpad = XSIZE / (ft_tab_size((void **) map[0]) * 2);
-	const size_t	ypad = YSIZE / (ft_tab_size((void **) map) * 2);
-	t_xclient		*xclient;
+	t_xclient	*xclient;
 
 	xclient = malloc(sizeof(t_xclient));
 	if (!xclient)
 		return (NULL);
 	xclient->mlx = NULL;
 	xclient->win = NULL;
-	xclient->ximage = NULL;
+	xclient->ximage.img = NULL;
 	xclient->mlx = mlx_init();
 	if (!(xclient->mlx))
 		return (ft_free_xclient(xclient), NULL);
-	xclient->win = mlx_new_window(xclient->mlx, XSIZE, YSIZE, TITLE);
+	xclient->win = mlx_new_window(xclient->mlx, WIDTH, HEIGHT, TITLE);
 	if (!(xclient->win))
 		return (ft_free_xclient(xclient), NULL);
-	xclient->ximage = ft_new_ximage(xclient);
-	if (!(xclient->ximage))
+	xclient->xparams = ft_init_xparams(map);
+	xclient->ximage = ft_init_ximage(xclient);
+	if (!(xclient->ximage.img))
 		return (ft_free_xclient(xclient), NULL);
-	xclient->map = map;
-	xclient->ppad = ft_min(xpad, ypad);
-	xclient->ox = XSIZE / 2 - (XSIZE / (xpad * 4) * xclient->ppad);
-	xclient->oy = YSIZE / 2 - (YSIZE / (ypad * 4) * xclient->ppad);
 	return (xclient);
 }
