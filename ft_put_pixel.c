@@ -6,7 +6,7 @@
 /*   By: abenamar <abenamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 02:46:40 by abenamar          #+#    #+#             */
-/*   Updated: 2023/07/19 15:41:59 by abenamar         ###   ########.fr       */
+/*   Updated: 2023/07/21 20:08:46 by abenamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	ft_put_pixel(t_ximage ximage, int x, int y, int color)
 {
 	char	*pos;
 
-	x += ximage.xparams.origin.x;
-	y += ximage.xparams.origin.y;
 	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
 		return ;
 	pos = ximage.data + x * (ximage.bpp / 8) + y * ximage.lsize;
