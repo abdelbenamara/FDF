@@ -6,7 +6,7 @@
 /*   By: abenamar <abenamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 23:00:16 by abenamar          #+#    #+#             */
-/*   Updated: 2023/07/18 20:14:44 by abenamar         ###   ########.fr       */
+/*   Updated: 2023/07/21 02:30:20 by abenamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,32 @@
 # define HEIGHT	720
 # define TITLE	"FDF"
 
+# ifndef M_PI
+#  define M_PI	3.14159265358979323846	/* pi */
+# endif
+
 typedef struct s_vec2
 {
 	int	x;
 	int	y;
 }	t_vec2;
 
+typedef struct s_vec3
+{
+	int	x;
+	int	y;
+	int	z;
+}	t_vec3;
+
 typedef struct s_xparams
 {
 	char	***map;
 	size_t	width;
 	size_t	height;
-	size_t	wpad;
-	size_t	hpad;
-	size_t	padding;
-	size_t	zoom;
+	int		basis;
 	t_vec2	origin;
+	t_vec2	scale;
+	t_vec3	theta;
 }	t_xparams;
 
 typedef struct s_ximage
@@ -64,10 +74,13 @@ typedef struct s_xclient
 
 void		ft_free_map(char ***map);
 char		***ft_new_map(char *file);
+void		ft_reset_xparams(t_xparams *xparams);
 t_ximage	ft_init_ximage(t_xclient *xclient);
 void		ft_free_xclient(t_xclient *xclient);
 t_xclient	*ft_new_xclient(char ***map);
 
+void		ft_put_pixel(t_ximage ximage, int x, int y, int color);
+void		ft_plot_line(t_ximage ximage, t_vec2 u, t_vec2 v);
 int			ft_render_frame(t_xclient *xclient);
 
 int			ft_handle_key_press(int keycode, t_xclient *xclient);
