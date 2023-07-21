@@ -6,7 +6,7 @@
 /*   By: abenamar <abenamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 22:59:33 by abenamar          #+#    #+#             */
-/*   Updated: 2023/07/07 02:15:11 by abenamar         ###   ########.fr       */
+/*   Updated: 2023/07/21 19:46:46 by abenamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int ac, char **av)
 {
-	char		***map;
+	int			***map;
 	t_xclient	*xclient;
 
 	if (ac < 2)
