@@ -6,23 +6,13 @@
 /*   By: abenamar <abenamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 04:20:24 by abenamar          #+#    #+#             */
-/*   Updated: 2023/07/21 02:31:23 by abenamar         ###   ########.fr       */
+/*   Updated: 2023/07/21 19:50:16 by abenamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static size_t	ft_tab_size(void **tab)
-{
-	size_t	i;
-
-	i = 0;
-	while (tab[i])
-		++i;
-	return (i);
-}
-
-static t_xparams	ft_init_xparams(char ***map)
+static t_xparams	ft_init_xparams(int ***map)
 {
 	t_xparams	xparams;
 	double		diagonal;
@@ -40,7 +30,7 @@ static t_xparams	ft_init_xparams(char ***map)
 	return (xparams);
 }
 
-t_xclient	*ft_new_xclient(char ***map)
+t_xclient	*ft_new_xclient(int ***map)
 {
 	t_xclient	*xclient;
 
