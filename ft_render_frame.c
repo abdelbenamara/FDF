@@ -6,7 +6,7 @@
 /*   By: abenamar <abenamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 20:22:29 by abenamar          #+#    #+#             */
-/*   Updated: 2023/07/21 02:31:56 by abenamar         ###   ########.fr       */
+/*   Updated: 2023/07/22 00:38:36 by abenamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,16 @@ static t_vec2	ft_2d_projection(t_ximage ximage, int x, int y, int z)
 	s.x = (x - ximage.xparams.width / 2) * ximage.xparams.scale.x;
 	s.y = (y - ximage.xparams.height / 2) * ximage.xparams.scale.x;
 	s.z = z * ximage.xparams.scale.y;
-	b.x = cos(ty) * (cos(tz) * s.x + sin(tz) * s.y) - sin(ty) * s.z;
-	b.y = sin(tx) * (sin(ty) * (cos(tz) * s.x + sin(tz) * s.y) + cos(ty) * s.z);
-	b.y -= cos(tx) * (sin(tz) * s.x - cos(tz) * s.y);
+	b.x = cos(ty) * (cos(tz) * s.x + sin(tz) * s.y) - sin(ty) * s.z
+		+ ximage.xparams.origin.x;
+	b.y = sin(tx) \
+		* (sin(ty) * (cos(tz) * s.x + sin(tz) * s.y) + cos(ty) * s.z) \
+		- cos(tx) * (sin(tz) * s.x - cos(tz) * s.y)
+		+ ximage.xparams.origin.y;
 	return (b);
 }
 
-static void	ft_plot_map(t_ximage ximage, char ***map)
+static void	ft_plot_map(t_ximage ximage, int ***map)
 {
 	int		i;
 	int		j;
@@ -44,14 +47,14 @@ static void	ft_plot_map(t_ximage ximage, char ***map)
 		{
 			if (!(map[j][i]))
 				break ;
-			u = ft_2d_projection(ximage, i, j, ft_atoi(map[j][i]));
+			u = ft_2d_projection(ximage, i, j, map[j][i][0]);
 			v = u;
 			if (i > 0)
-				v = ft_2d_projection(ximage, i - 1, j, ft_atoi(map[j][i - 1]));
-			ft_plot_line(ximage, u, v);
+				v = ft_2d_projection(ximage, i - 1, j, map[j][i - 1][0]);
+			ft_plot_line(ximage, u, v, map[j][i][1]);
 			if (j > 0 && map[j - 1][i])
-				v = ft_2d_projection(ximage, i, j - 1, ft_atoi(map[j - 1][i]));
-			ft_plot_line(ximage, u, v);
+				v = ft_2d_projection(ximage, i, j - 1, map[j - 1][i][0]);
+			ft_plot_line(ximage, u, v, map[j][i][1]);
 			++i;
 		}
 		++j;
