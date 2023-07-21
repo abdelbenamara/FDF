@@ -6,7 +6,7 @@
 /*   By: abenamar <abenamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 04:20:24 by abenamar          #+#    #+#             */
-/*   Updated: 2023/07/18 20:15:24 by abenamar         ###   ########.fr       */
+/*   Updated: 2023/07/21 02:31:23 by abenamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,18 @@ static size_t	ft_tab_size(void **tab)
 static t_xparams	ft_init_xparams(char ***map)
 {
 	t_xparams	xparams;
+	double		diagonal;
+	int			tmp;
 
 	xparams.map = map;
 	xparams.width = ft_tab_size((void **) map[0]);
 	xparams.height = ft_tab_size((void **) map);
-	xparams.wpad = WIDTH / (xparams.width * 2);
-	xparams.hpad = HEIGHT / (xparams.height * 2);
-	xparams.padding = xparams.wpad;
-	if (xparams.wpad > xparams.hpad)
-		xparams.padding = xparams.hpad;
-	xparams.zoom = xparams.padding;
-	xparams.origin.x = WIDTH / 2;
-	xparams.origin.y = HEIGHT / 2;
+	diagonal = sqrt(pow(xparams.width, 2) + pow(xparams.height, 2));
+	xparams.basis = WIDTH / diagonal;
+	tmp = HEIGHT / diagonal;
+	if (tmp < xparams.basis)
+		xparams.basis = tmp;
+	ft_reset_xparams(&xparams);
 	return (xparams);
 }
 
