@@ -6,7 +6,7 @@
 /*   By: abenamar <abenamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 02:28:48 by abenamar          #+#    #+#             */
-/*   Updated: 2023/07/20 19:07:05 by abenamar         ###   ########.fr       */
+/*   Updated: 2023/07/22 00:03:03 by abenamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ft_abs(int i)
 	return (i);
 }
 
-static void	ft_plot_line_low(t_ximage ximage, t_vec2 u, t_vec2 v)
+static void	ft_plot_line_low(t_ximage ximage, t_vec2 u, t_vec2 v, int color)
 {
 	t_vec2	d;
 	int		di;
@@ -36,7 +36,7 @@ static void	ft_plot_line_low(t_ximage ximage, t_vec2 u, t_vec2 v)
 	di = 2 * d.y - d.x;
 	while (u.x < v.x)
 	{
-		ft_put_pixel(ximage, u.x, u.y, 0x00FFFFFF);
+		ft_put_pixel(ximage, u.x, u.y, color);
 		if (di > 0)
 		{
 			u.y += yi;
@@ -48,7 +48,7 @@ static void	ft_plot_line_low(t_ximage ximage, t_vec2 u, t_vec2 v)
 	}
 }
 
-static void	ft_plot_line_high(t_ximage ximage, t_vec2 u, t_vec2 v)
+static void	ft_plot_line_high(t_ximage ximage, t_vec2 u, t_vec2 v, int color)
 {
 	t_vec2	d;
 	int		di;
@@ -65,7 +65,7 @@ static void	ft_plot_line_high(t_ximage ximage, t_vec2 u, t_vec2 v)
 	di = 2 * d.x - d.y;
 	while (u.y < v.y)
 	{
-		ft_put_pixel(ximage, u.x, u.y, 0x00FFFFFF);
+		ft_put_pixel(ximage, u.x, u.y, color);
 		if (di > 0)
 		{
 			u.x += xi;
@@ -77,20 +77,20 @@ static void	ft_plot_line_high(t_ximage ximage, t_vec2 u, t_vec2 v)
 	}
 }
 
-void	ft_plot_line(t_ximage ximage, t_vec2 u, t_vec2 v)
+void	ft_plot_line(t_ximage ximage, t_vec2 u, t_vec2 v, int color)
 {
 	if (ft_abs(v.y - u.y) < ft_abs(v.x - u.x))
 	{
 		if (u.x > v.x)
-			ft_plot_line_low(ximage, v, u);
+			ft_plot_line_low(ximage, v, u, color);
 		else
-			ft_plot_line_low(ximage, u, v);
+			ft_plot_line_low(ximage, u, v, color);
 	}
 	else
 	{
 		if (u.y > v.y)
-			ft_plot_line_high(ximage, v, u);
+			ft_plot_line_high(ximage, v, u, color);
 		else
-			ft_plot_line_high(ximage, u, v);
+			ft_plot_line_high(ximage, u, v, color);
 	}
 }
