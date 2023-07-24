@@ -6,7 +6,7 @@
 /*   By: abenamar <abenamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 23:00:16 by abenamar          #+#    #+#             */
-/*   Updated: 2023/07/22 00:37:56 by abenamar         ###   ########.fr       */
+/*   Updated: 2023/07/23 17:13:17 by abenamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void		ft_free_xclient(t_xclient *xclient);
 t_xclient	*ft_new_xclient(int ***map);
 
 void		ft_put_pixel(t_ximage ximage, int x, int y, int color);
-void		ft_plot_line(t_ximage ximage, t_vec2 u, t_vec2 v, int color);
+void		ft_plot_line(t_ximage ximage, t_vec3 u, t_vec3 v);
 int			ft_render_frame(t_xclient *xclient);
 
 int			ft_handle_key_press(int keycode, t_xclient *xclient);
