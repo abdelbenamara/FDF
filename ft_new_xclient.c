@@ -6,7 +6,7 @@
 /*   By: abenamar <abenamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 04:20:24 by abenamar          #+#    #+#             */
-/*   Updated: 2023/07/21 19:50:16 by abenamar         ###   ########.fr       */
+/*   Updated: 2023/07/26 19:45:09 by abenamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ t_xclient	*ft_new_xclient(int ***map)
 	xclient->mlx = NULL;
 	xclient->win = NULL;
 	xclient->ximage.img = NULL;
+	xclient->xparams = ft_init_xparams(map);
 	xclient->mlx = mlx_init();
 	if (!(xclient->mlx))
 		return (ft_free_xclient(xclient), NULL);
 	xclient->win = mlx_new_window(xclient->mlx, WIDTH, HEIGHT, TITLE);
 	if (!(xclient->win))
 		return (ft_free_xclient(xclient), NULL);
-	xclient->xparams = ft_init_xparams(map);
 	xclient->ximage = ft_init_ximage(xclient);
 	if (!(xclient->ximage.img))
 		return (ft_free_xclient(xclient), NULL);
