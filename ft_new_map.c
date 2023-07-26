@@ -6,7 +6,7 @@
 /*   By: abenamar <abenamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 00:17:21 by abenamar          #+#    #+#             */
-/*   Updated: 2023/07/22 00:39:45 by abenamar         ###   ########.fr       */
+/*   Updated: 2023/07/26 19:38:42 by abenamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,27 @@ static char	*ft_upper(char *str)
 	return (str);
 }
 
+static void	ft_init_colors(int *tab)
+{
+	const int	top = tab[0] > 0;
+	int			z;
+	int			r;
+	int			g;
+	int			b;
+
+	z = tab[0];
+	if (z < -51)
+		z = -51;
+	else if (z > 51)
+		z = 51;
+	b = !top * z * -5;
+	r = top * z * 5;
+	g = 255 - b - r;
+	tab[3] = (r << 16 | g << 8 | b);
+	z = (51 + z) * 2.5;
+	tab[4] = (z << 16 | z << 8 | z);
+}
+
 static int	**ft_strs_to_tab(char **strs)
 {
 	int		**tab;
@@ -37,16 +58,18 @@ static int	**ft_strs_to_tab(char **strs)
 	i = 0;
 	while (strs[i])
 	{
-		tab[i] = malloc(2 * sizeof(int));
+		tab[i] = malloc(5 * sizeof(int));
 		if (!(tab[i]))
 			return (ft_free_tab((void **) tab), NULL);
 		tab[i][0] = ft_atoi(strs[i]);
 		tab[i][1] = 0x00FFFFFF;
+		tab[i][2] = 0x00FFFFFF;
 		tmp = ft_split(strs[i], ',');
 		if (tmp && tmp[1])
-			tab[i][1] = ft_atoi_base(ft_upper(tmp[1] + 2), "0123456789ABCDEF");
+			tab[i][2] = ft_atoi_base(ft_upper(tmp[1] + 2), "0123456789ABCDEF");
 		if (tmp)
 			ft_free_tab((void **) tmp);
+		ft_init_colors(tab[i]);
 		++i;
 	}
 	return (tab[i] = NULL, tab);
