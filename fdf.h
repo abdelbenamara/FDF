@@ -6,7 +6,7 @@
 /*   By: abenamar <abenamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 23:00:16 by abenamar          #+#    #+#             */
-/*   Updated: 2023/07/23 17:13:17 by abenamar         ###   ########.fr       */
+/*   Updated: 2023/07/26 19:48:45 by abenamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@
 # include "libft.h"
 
 # define USAGE	"Usage: fdf file.fdf\n"
-# define WIDTH	1280
-# define HEIGHT	720
+# ifndef WIDTH
+#  define WIDTH		1280
+# endif
+# ifndef HEIGHT
+#  define HEIGHT	720
+# endif
 # define TITLE	"FDF"
 
 # ifndef M_PI
@@ -51,6 +55,7 @@ typedef struct s_xparams
 	t_vec2	origin;
 	t_vec2	scale;
 	t_vec3	theta;
+	uint8_t	cmode;
 }	t_xparams;
 
 typedef struct s_ximage
@@ -66,9 +71,9 @@ typedef struct s_ximage
 
 typedef struct s_xclient
 {
+	t_xparams	xparams;
 	void		*mlx;
 	void		*win;
-	t_xparams	xparams;
 	t_ximage	ximage;
 }	t_xclient;
 
