@@ -6,7 +6,7 @@
 /*   By: abenamar <abenamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 20:22:29 by abenamar          #+#    #+#             */
-/*   Updated: 2023/07/24 10:04:58 by abenamar         ###   ########.fr       */
+/*   Updated: 2023/07/25 21:52:54 by abenamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_vec3	ft_2d_projection(t_ximage ximage, int x, int y, int *z)
 		* (sin(ty) * (cos(tz) * a.x + sin(tz) * a.y) + cos(ty) * a.z) \
 		- cos(tx) * (sin(tz) * a.x - cos(tz) * a.y)
 		+ ximage.xparams.origin.y;
-	b.z = z[1];
+	b.z = z[ximage.xparams.cmode];
 	return (b);
 }
 
