@@ -6,7 +6,7 @@
 #    By: abenamar <abenamar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/02 22:58:00 by abenamar          #+#    #+#              #
-#    Updated: 2023/07/22 00:36:45 by abenamar         ###   ########.fr        #
+#    Updated: 2023/07/27 03:17:42 by abenamar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,6 @@ CC := cc
 CFLAGS := -Wall
 CFLAGS += -Wextra
 CFLAGS += -Werror
-CFLAGS += -g3
 
 RM := rm -f
 
