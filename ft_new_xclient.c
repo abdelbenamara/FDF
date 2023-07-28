@@ -6,11 +6,39 @@
 /*   By: abenamar <abenamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 04:20:24 by abenamar          #+#    #+#             */
-/*   Updated: 2023/07/26 19:45:09 by abenamar         ###   ########.fr       */
+/*   Updated: 2023/07/29 01:22:31 by abenamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static size_t	ft_map_width(int ***map)
+{
+	size_t	i;
+	size_t	w1;
+	size_t	w2;
+
+	if (!(map[0]))
+		return (0);
+	i = 0;
+	w1 = 0;
+	while (map[i])
+	{
+		w2 = ft_tab_size((void **) map[i]);
+		if (w2 > w1)
+			w1 = w2;
+		++i;
+	}
+	i = 0;
+	while (map[i])
+	{
+		w2 = ft_tab_size((void **) map[i]);
+		if (w1 - w2 > 1)
+			return (0);
+		++i;
+	}
+	return (w1);
+}
 
 static t_xparams	ft_init_xparams(int ***map)
 {
@@ -19,7 +47,7 @@ static t_xparams	ft_init_xparams(int ***map)
 	int			tmp;
 
 	xparams.map = map;
-	xparams.width = ft_tab_size((void **) map[0]);
+	xparams.width = ft_map_width(map);
 	xparams.height = ft_tab_size((void **) map);
 	diagonal = sqrt(pow(xparams.width, 2) + pow(xparams.height, 2));
 	xparams.basis = WIDTH / diagonal;
@@ -41,6 +69,8 @@ t_xclient	*ft_new_xclient(int ***map)
 	xclient->win = NULL;
 	xclient->ximage.img = NULL;
 	xclient->xparams = ft_init_xparams(map);
+	if (!(xclient->xparams.width))
+		return (ft_free_xclient(xclient), NULL);
 	xclient->mlx = mlx_init();
 	if (!(xclient->mlx))
 		return (ft_free_xclient(xclient), NULL);
